@@ -27,8 +27,8 @@ def passwordCounter(turns):
                     password += 1
         elif direction == "R":
             if steps < startingPoint:
-                difference = (steps % 100) - startingPoint
-                startingPoint = 100 - difference
+                difference = (steps % 100) + startingPoint
+                startingPoint = 100 + (100-difference)
                 if startingPoint == 0 or startingPoint == 100:
                     password += 1
             else:
@@ -39,7 +39,8 @@ def passwordCounter(turns):
     return password
 
 
-print(passwordCounter(testTurns))
+print(passwordCounter(turns=['L68', 'L30', 'R48',
+                             'L5', 'R60', 'L55', 'L1', 'L99', 'R14', 'L82']))
 '''
 If the dial is going left and the turn is greater than the starting point
 the difference between them needs to be taken 100 to get the new starting point.
