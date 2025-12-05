@@ -4,7 +4,7 @@ testTurns = []
 with open('aoc25-day1-part1.csv', newline="") as inputfile:
     for row in csv.reader(inputfile):
         testTurns.append(row[0])
-print(testTurns)
+# print(testTurns)
 
 
 def passwordCounter(turns):
@@ -13,6 +13,8 @@ def passwordCounter(turns):
     password = 0
 
     for i in turns:
+        if startingPoint == 100:
+            startingPoint = 0
         direction = i[0:1]  # direction
         steps = int(i[1:])   # turns
         if direction == 'L':
@@ -27,8 +29,8 @@ def passwordCounter(turns):
                     password += 1
         elif direction == "R":
             if steps < startingPoint:
-                difference = (steps % 100) + startingPoint
-                startingPoint = 100 + (100-difference)
+                difference = 100 - startingPoint
+                startingPoint = (steps % 100) - difference
                 if startingPoint == 0 or startingPoint == 100:
                     password += 1
             else:
@@ -39,6 +41,7 @@ def passwordCounter(turns):
     return password
 
 
+print(passwordCounter(testTurns))
 print(passwordCounter(turns=['L68', 'L30', 'R48',
                              'L5', 'R60', 'L55', 'L1', 'L99', 'R14', 'L82']))
 '''
