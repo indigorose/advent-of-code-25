@@ -19,8 +19,8 @@ def passwordCounter(turns):
         steps = int(i[1:])   # turns
         if direction == 'L':
             if steps > startingPoint:
-                difference = startingPoint-(steps % 100)
-                startingPoint = 100+difference
+                difference = startingPoint-100
+                startingPoint = 0+(difference-steps % 100)
                 if startingPoint == 0 or startingPoint == 100:
                     password += 1
             else:
