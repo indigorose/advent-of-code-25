@@ -13,35 +13,50 @@ def passwordCounter(turns):
     password = 0
 
     for i in turns:
-        if startingPoint == 100:
-            startingPoint = 0
         direction = i[0:1]  # direction
-        steps = int(i[1:])   # turns
-        if direction == 'L':
+        steps = int(i[1:]) % 100  # turns
+        if direction == "L":
+            # How many steps back to the starting point
             if steps > startingPoint:
-                difference = startingPoint-100
-                startingPoint = 0+(difference-steps % 100)
-                if startingPoint == 0 or startingPoint == 100:
-                    password += 1
+                startingPoint = 100 - (steps - startingPoint)
             else:
-                startingPoint = startingPoint - (steps % 100)
-                if startingPoint == 0 or startingPoint == 100:
-                    password += 1
+                startingPoint = startingPoint - steps
         elif direction == "R":
+            # How many steps to the starting point
             if steps < startingPoint:
-                difference = 100 - startingPoint
-                startingPoint = (steps % 100) - difference
-                if startingPoint == 0 or startingPoint == 100:
-                    password += 1
+                startingPoint = (100 - steps) + startingPoint
             else:
-                startingPoint = startingPoint + (steps % 100)
-                if startingPoint == 0 or startingPoint == 100:
-                    password += 1
-
+                startingPoint = steps + startingPoint
+        if startingPoint == 0 or startingPoint == 100:
+            password += 1
+            startingPoint = 0
     return password
 
+    #     if direction == 'L':
+    #         if steps > startingPoint:
+    #             difference = startingPoint-100
+    #             startingPoint = 0+(difference-steps % 100)
+    #             if startingPoint == 0 or startingPoint == 100:
+    #                 password += 1
+    #         else:
+    #             startingPoint = startingPoint - (steps % 100)
+    #             if startingPoint == 0 or startingPoint == 100:
+    #                 password += 1
+    #     elif direction == "R":
+    #         if steps < startingPoint:
+    #             difference = 100 - startingPoint
+    #             startingPoint = (steps % 100) - difference
+    #             if startingPoint == 0 or startingPoint == 100:
+    #                 password += 1
+    #         else:
+    #             startingPoint = startingPoint + (steps % 100)
+    #             if startingPoint == 0 or startingPoint == 100:
+    #                 password += 1
 
-print(passwordCounter(testTurns))
+    # return password
+
+
+# print(passwordCounter(testTurns))
 print(passwordCounter(turns=['L68', 'L30', 'R48',
                              'L5', 'R60', 'L55', 'L1', 'L99', 'R14', 'L82']))
 '''
