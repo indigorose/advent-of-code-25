@@ -16,12 +16,12 @@ def passwordCounter(turns):
 
     for i in turns:
         direction = i[0:1]  # direction
-        steps = int(i[1:]) % 100  # turns
+        steps = int(i[1:])  # turns
         if direction == "L":
             # How many steps back to the starting point
             if steps > starting_point:
-                if starting_point-steps % 100 < 0:
-                    zero_points += 1
+                if starting_point-steps < 0:
+                    zero_points += (steps//100)
                 starting_point = 100 - (steps - starting_point)
             else:
                 starting_point = starting_point - steps
@@ -29,7 +29,7 @@ def passwordCounter(turns):
             # How many steps to the starting point
             if steps < starting_point:
                 if starting_point + steps > 100:
-                    zero_points += 1
+                    zero_points += (steps//100)
                 starting_point = steps - (100 - starting_point)
             else:
                 starting_point = steps + starting_point
