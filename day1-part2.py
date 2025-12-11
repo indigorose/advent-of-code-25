@@ -5,7 +5,7 @@ with open('aoc25-day1-part1.csv', newline="") as inputfile:
     for row in csv.reader(inputfile):
         testTurns.append(row[0])
 # print(testTurns)
-
+# todo - check how many rotations pass 0 or 100. 
 
 def passwordCounter(turns):
     starting_point = 50
